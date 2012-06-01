@@ -1,6 +1,7 @@
 ﻿/* Geolocation Class Library
  * Author: Scott Schluer (scott.schluer@gmail.com)
  * May 29, 2012
+ * https://github.com/scottschluer/Geolocation
  */
 
 namespace Geolocation
