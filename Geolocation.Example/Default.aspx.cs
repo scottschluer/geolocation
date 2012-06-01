@@ -34,6 +34,7 @@ namespace Geolocation.Example
             double radius = Convert.ToDouble(Radius.SelectedValue);
 
             // These coordinates would normally be retrieved from a geocoding API such as Google's or Bing's.
+            // See https://github.com/scottschluer/Geocoder for an easy to use Geocoder API for Google.
             Coordinate originCoordinate = new Coordinate { Latitude = 34.076234, Longitude = -118.395314 };
 
             // Get the boundaries (min and max) latitude and longitude values. This forms a "square" around the origin coordinate

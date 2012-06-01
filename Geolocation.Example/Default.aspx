@@ -10,6 +10,7 @@
     <form id="form1" runat="server">
     <div>
         For real world usage, you would obviously accept a zip code input here and use an API such as <a href="https://developers.google.com/maps/documentation/javascript/geocoding">Google's</a> or <a href="http://msdn.microsoft.com/en-us/library/cc966793.aspx">Bing's</a> to get the lat/long for the origin location. Here, I will use 90210 and hard code the lat/long.<br/><br/>
+        See <a href="https://github.com/scottschluer/Geocoder">https://github.com/scottschluer/Geocoder</a> for an easy to use Geocoder API for Google.<br/><br/>
         Zip Code: 90210<br/>
         Radius: 
             <asp:DropDownList runat="server" ID="Radius">
