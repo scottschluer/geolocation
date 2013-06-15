@@ -30,12 +30,12 @@ double bearing = GeoCalculator.GetBearing(origin, destination);
 
 Find the lat/long boundaries for a given origin coordinate and radius:
 ```c#
-  CoordinateBoundaries boundaries = new CoordinateBoundaries(34.0675918, -118.3977091, 25);
-  //OR
-  CoordinateBoundaries boundaries = new CoordinateBoundaries(origin, 25);
+CoordinateBoundaries boundaries = new CoordinateBoundaries(34.0675918, -118.3977091, 25);
+//OR
+CoordinateBoundaries boundaries = new CoordinateBoundaries(origin, 25);
   
-  double minLatitude = boundaries.MinLatitude;
-  double maxLatitude = boundaries.MaxLatitude;
-  double minLongitude = boundaries.MinLongitude;
-  double maxLongitude = boundaries.MaxLongitude;
+double minLatitude = boundaries.MinLatitude;
+double maxLatitude = boundaries.MaxLatitude;
+double minLongitude = boundaries.MinLongitude;
+double maxLongitude = boundaries.MaxLongitude;
 ```
