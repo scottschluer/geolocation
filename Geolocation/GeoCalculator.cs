@@ -20,6 +20,12 @@ namespace Geolocation
 
         /// <summary>   
         /// Calculate the distance between two sets of coordinates.
+        /// <param name="originLatitude">The latitude of the origin location in decimal notation</param>
+        /// <param name="originLongitude">The longitude of the origin location in decimal notation</param>
+        /// <param name="destinationLatitude">The latitude of the destination location in decimal notation</param>
+        /// <param name="destinationLongitude">The longitude of the destination location in decimal notation</param>
+        /// <param name="decimalPlaces">The number of decimal places to round the return value to</param>
+        /// <returns>A <see cref="Double"/> value representing the distance in miles from the origin to the destination coordinate</returns>
         /// </summary>
         public static double GetDistance(double originLatitude, double originLongitude, double destinationLatitude, double destinationLongitude, int decimalPlaces)
         {
@@ -40,13 +46,26 @@ namespace Geolocation
         }
 
         /// <summary>
+        /// Calculate the distance between two sets of <see cref="Coordinate"/> objects
+        /// </summary>
+        /// <param name="originCoordinate">A <see cref="Coordinate"/> object representing the origin location</param>
+        /// <param name="destinationCoordinate">A <see cref="Coordinate"/> object representing the destination location</param>
+        /// <param name="decimalPlaces">The number of decimal places to round the return value to</param>
+        /// <returns>A <see cref="Double"/> value representing the distance in miles from the origin to the destination coordinate</returns>
+        public static Double GetDistance(Coordinate originCoordinate, Coordinate destinationCoordinate, int decimalPlaces)
+        {
+            return GetDistance(originCoordinate.Latitude, originCoordinate.Longitude, destinationCoordinate.Latitude,
+                destinationCoordinate.Longitude, decimalPlaces);
+        }
+
+        /// <summary>
         /// Calculates the bearing, in degrees between two geographic points
         /// </summary>
-        /// <param name="originLatitude">Latitude of the origin point</param>
-        /// <param name="originLongitude">Longitude of the origin point</param>
-        /// <param name="destinationLatitude">Latitude of the destination point</param>
-        /// <param name="destinationLongitude">Longitude of the destination point</param>
-        /// <returns>A double value indicating the bearing from the origin to the destination</returns>
+        /// <param name="originLatitude">The latitude of the origin location in decimal notation</param>
+        /// <param name="originLongitude">The longitude of the origin location in decimal notation</param>
+        /// <param name="destinationLatitude">The latitude of the destination location in decimal notation</param>
+        /// <param name="destinationLongitude">The longitude of the destination location in decimal notation</param>
+        /// <returns>A <see cref="Double"/> value indicating the bearing from the origin to the destination</returns>
         public static double GetBearing(double originLatitude, double originLongitude, double destinationLatitude, double destinationLongitude)
         {
             if (!CoordinateValidator.Validate(originLatitude, originLongitude))
@@ -66,12 +85,24 @@ namespace Geolocation
         }
 
         /// <summary>
+        /// Calculates the bearing, in degrees between two <see cref="Coordinate"/> objects
+        /// </summary>
+        /// <param name="originCoordinate">A <see cref="Coordinate"/> object representing the origin location</param>
+        /// <param name="destinationCoordinate">A <see cref="Coordinate"/> object representing the destination location</param>
+        /// <returns>A <see cref="Double"/> value indicating the bearing from the origin to the destination</returns>
+        public static double GetBearing(Coordinate originCoordinate, Coordinate destinationCoordinate)
+        {
+            return GetBearing(originCoordinate.Latitude, originCoordinate.Longitude, destinationCoordinate.Latitude,
+                              destinationCoordinate.Longitude);
+        }
+
+        /// <summary>
         /// Gets the cardinal or ordinal direction from the origin point to the destination point
         /// </summary>
-        /// <param name="originLatitude">Latitude of the origin point</param>
-        /// <param name="originLongitude">Longitude of the origin point</param>
-        /// <param name="destinationLatitude">Latitude of the destination point</param>
-        /// <param name="destinationLongitude">Longitude of the destination point</param>
+        /// <param name="originLatitude">The latitude of the origin location in decimal notation</param>
+        /// <param name="originLongitude">The longitude of the origin location in decimal notation</param>
+        /// <param name="destinationLatitude">The latitude of the destination location in decimal notation</param>
+        /// <param name="destinationLongitude">The longitude of the destination location in decimal notation</param>
         /// <returns>A string value indicating the cardinal or ordinal direction from the origin to the desintation point</returns>
         public static string GetDirection(double originLatitude, double originLongitude, double destinationLatitude, double destinationLongitude)
         {
@@ -92,6 +123,18 @@ namespace Geolocation
             if (bearing > 292.5 && bearing < 337.5) return "NW";
 
             return String.Empty;
+        }
+
+        /// <summary>
+        /// Gets the cardinal or ordinal direction from the origin point to the destination point
+        /// </summary>
+        /// <param name="originCoordinate">A <see cref="Coordinate"/> object representing the origin location</param>
+        /// <param name="destinationCoordinate">A <see cref="Coordinate"/> object representing the destination location</param>
+        /// <returns>A <see cref="String"/> value indicating the cardinal or ordinal direction from the origin to the desintation point</returns>
+        public static string GetDirection(Coordinate originCoordinate, Coordinate destinationCoordinate)
+        {
+            return GetDirection(originCoordinate.Latitude, originCoordinate.Longitude, destinationCoordinate.Latitude,
+                                destinationCoordinate.Longitude);
         }
     }
 }

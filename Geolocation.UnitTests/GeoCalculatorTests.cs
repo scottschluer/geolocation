@@ -48,6 +48,18 @@ namespace Geolocation.UnitTests
         }
 
         [Test]
+        public void GetDistanceWithCoordinateObjectReturnsCorrectResult()
+        {
+            Coordinate origin = Constants.Coordinates.ValidCoordinate;
+            Coordinate destination = Constants.Coordinates.ValidDestinationCoordinate;
+
+            double distance = GeoCalculator.GetDistance(origin, destination, 1);
+            const double expectedResult = 75.4;
+
+            Assert.AreEqual(distance, expectedResult);
+        }
+
+        [Test]
         public void GetBearingThrowsArgumentExceptionWithInvalidOriginCoordinates()
         {
             Coordinate origin = Constants.Coordinates.LatitudeBelowMinimum;
@@ -80,6 +92,18 @@ namespace Geolocation.UnitTests
         }
 
         [Test]
+        public void GetBearingWithCoordinateObjectReturnsCorrectResult()
+        {
+            Coordinate origin = Constants.Coordinates.ValidCoordinate;
+            Coordinate destination = Constants.Coordinates.ValidDestinationCoordinate;
+
+            double distance = GeoCalculator.GetBearing(origin, destination);
+            const double expectedResult = 337.39007167195172;
+
+            Assert.AreEqual(distance, expectedResult);
+        }
+
+        [Test]
         public void GetDirectionThrowsArgumentExceptionWithInvalidOriginCoordinates()
         {
             Coordinate origin = Constants.Coordinates.LatitudeBelowMinimum;
@@ -106,6 +130,18 @@ namespace Geolocation.UnitTests
             Coordinate destination = Constants.Coordinates.ValidDestinationCoordinate;
 
             string direction = GeoCalculator.GetDirection(origin.Latitude, origin.Longitude, destination.Latitude, destination.Longitude);
+            const string expectedResult = "NW";
+
+            Assert.AreEqual(direction, expectedResult);
+        }
+
+        [Test]
+        public void GetDirectionWithCoordinateObjectReturnsCorrectNorthWestResult()
+        {
+            Coordinate origin = Constants.Coordinates.ValidCoordinate;
+            Coordinate destination = Constants.Coordinates.ValidDestinationCoordinate;
+
+            string direction = GeoCalculator.GetDirection(origin, destination);
             const string expectedResult = "NW";
 
             Assert.AreEqual(direction, expectedResult);
