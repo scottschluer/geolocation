@@ -89,6 +89,23 @@ namespace Geolocation
         /// <summary>
         /// Creates a new CoordinateBoundary object
         /// </summary>
+        /// <param name="originCoordinate">A <see cref="Coordinate"/> object representing the origin location</param>
+        /// <param name="distance">The distance from the origin point in statute miles</param>
+        public CoordinateBoundaries(Coordinate originCoordinate, double distance)
+        {
+            if (!CoordinateValidator.Validate(originCoordinate.Latitude, originCoordinate.Longitude))
+                throw new ArgumentException("Invalid coordinates supplied.");
+
+            _latitude = originCoordinate.Latitude;
+            _longitude = originCoordinate.Longitude;
+            _distance = distance;
+
+            Calculate();
+        }
+
+        /// <summary>
+        /// Creates a new CoordinateBoundary object
+        /// </summary>
         /// <param name="latitude">The origin point latitude in decimal notation</param>
         /// <param name="longitude">The origin point longitude in decimal notation</param>
         /// <param name="distance">The distance from the origin point in statute miles</param>
