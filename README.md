@@ -39,23 +39,15 @@ double maxLatitude = boundaries.MaxLatitude;
 double minLongitude = boundaries.MinLongitude;
 double maxLongitude = boundaries.MaxLongitude;
 
-// Select from all of the locations
 var results = _locations
-  // Where the location's latitude is between the min and max latitude boundaries
   .Where(x => x.Latitude >= minLatitude && x.Latitude <= maxLatitude)
-  // And where the location's longitude is between the min and max longitude boundaries
   .Where(x => x.Longitude >= minLongitude && x.Longitude <= maxLongitude)
-  // Populate an anonymous object with the desired data, including distance/direction calculation
   .Select(result => new 
   {
     Name = result.Name,
     Distance = GeoCalculator.GetDistance(originCoordinate.Latitude, originCoordinate.Longitude, result.Latitude, result.Longitude, 1),
     Direction = GeoCalculator.GetDirection(originCoordinate.Latitude, originCoordinate.Longitude, result.Latitude, result.Longitude)
   })
-  // Filter by distance. This is necessary because a radius is a circle, yet we've defined a square around the origin coordinate.
-  // This filter removes any extraneous results that would appear in the square's "corners" (imagine placing a circle inside a square of the
-  // same size for visualization).
   .Where(x => x.Distance <= 25)
-  // Sort by distance
   .OrderBy(x => x.Distance);
 ```
