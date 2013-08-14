@@ -45,8 +45,8 @@ var results = _locations
   .Select(result => new 
   {
     Name = result.Name,
-    Distance = GeoCalculator.GetDistance(originCoordinate.Latitude, originCoordinate.Longitude, result.Latitude, result.Longitude, 1),
-    Direction = GeoCalculator.GetDirection(originCoordinate.Latitude, originCoordinate.Longitude, result.Latitude, result.Longitude)
+    Distance = GeoCalculator.GetDistance(origin.Latitude, origin.Longitude, result.Latitude, result.Longitude, 1),
+    Direction = GeoCalculator.GetDirection(origin.Latitude, origin.Longitude, result.Latitude, result.Longitude)
   })
   .Where(x => x.Distance <= 25)
   .OrderBy(x => x.Distance);
