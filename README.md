@@ -8,7 +8,7 @@ Coordinate origin = new Coordinate(34.0675918, -118.3977091);
 Coordinate destination = new Coordinate(34.076234, -118.395314);
 ```
 
-Find the distance between two points:
+Find the distance between two points in miles:
 ```c#
 double distance = GeoCalculator.GetDistance(34.0675918, -118.3977091, 34.076234, -118.395314, 1);
 //OR
