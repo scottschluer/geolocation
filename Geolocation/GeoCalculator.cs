@@ -27,7 +27,7 @@ namespace Geolocation
         /// <param name="decimalPlaces">The number of decimal places to round the return value to</param>
         /// <returns>A <see cref="Double"/> value representing the distance in miles from the origin to the destination coordinate</returns>
         /// </summary>
-        public static double GetDistance(double originLatitude, double originLongitude, double destinationLatitude, double destinationLongitude, int decimalPlaces)
+        public static double GetDistance(double originLatitude, double originLongitude, double destinationLatitude, double destinationLongitude, int decimalPlaces = 1)
         {
             if (!CoordinateValidator.Validate(originLatitude, originLongitude))
                 throw new ArgumentException("Invalid origin coordinates supplied.");
@@ -52,7 +52,7 @@ namespace Geolocation
         /// <param name="destinationCoordinate">A <see cref="Coordinate"/> object representing the destination location</param>
         /// <param name="decimalPlaces">The number of decimal places to round the return value to</param>
         /// <returns>A <see cref="Double"/> value representing the distance in miles from the origin to the destination coordinate</returns>
-        public static Double GetDistance(Coordinate originCoordinate, Coordinate destinationCoordinate, int decimalPlaces)
+        public static Double GetDistance(Coordinate originCoordinate, Coordinate destinationCoordinate, int decimalPlaces = 1)
         {
             return GetDistance(originCoordinate.Latitude, originCoordinate.Longitude, destinationCoordinate.Latitude,
                 destinationCoordinate.Longitude, decimalPlaces);
