@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Geolocation</id>
+        <version>1.1.0</version>
+        <title>Geolocation</title>
+        <authors>scottschluer</authors>
+        <owners>scottschluer</owners>
+        <licenseUrl>https://github.com/scottschluer/geolocation/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/scottschluer/geolocation</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A C# class library that will calculate distance and cardinal direction between two sets of coordinates and provides the lat/long boundaries around an origin coordinate allowing for simple SQL or LINQ selection of locations within the given radius.</description>
+        <summary>A C# class library that will calculate distance and cardinal direction between two sets of coordinates and provides the lat/long boundaries around an origin coordinate allowing for simple SQL or LINQ</summary>
+        <releaseNotes>
+			- Added support for distance calculations using nautical miles, kilometers and meters.
+		</releaseNotes>
+        <copyright>(c) 2017 Scott Schluer</copyright>
+        <tags>coordinate coordinates distance latitude longitude boundaries geolocation location</tags>
+    </metadata>
+    <files>
+        <file src="..\Geolocation\bin\Debug\Geolocation.dll" target="lib\Geolocation.dll" />
+        <file src="..\Geolocation\bin\Debug\Geolocation.pdb" target="lib\Geolocation.pdb" />
+    </files>
+</package>
