@@ -7,42 +7,6 @@ namespace Geolocation.UnitTests
     public class GeoCalculatorTests
     {
         [Test]
-        public void EarthRadiusInMilesIsSetCorrectly()
-        {
-            double radius = GeoCalculator.EarthRadiusInMiles;
-            const double expectedResult = 3959.0;
-
-            Assert.AreEqual(expectedResult, radius);
-        }
-
-        [Test]
-        public void EarthRadiusInNauticalMilesIsSetCorrectly()
-        {
-            double radius = GeoCalculator.EarthRadiusInNauticalMiles;
-            const double expectedResult = 3440;
-
-            Assert.AreEqual(expectedResult, radius);
-        }
-
-        [Test]
-        public void EarthRadiusInKilometersIsSetCorrectly()
-        {
-            double radius = GeoCalculator.EarthRadiusInKilometers;
-            const double expectedResult = 6371.0;
-
-            Assert.AreEqual(expectedResult, radius);
-        }
-
-        [Test]
-        public void EarthRadiusInMetersIsSetCorrectly()
-        {
-            double radius = GeoCalculator.EarthRadiusInMeters;
-            const double expectedResult = 6371000.0;
-
-            Assert.AreEqual(expectedResult, radius);
-        }
-
-        [Test]
         public void GetDistanceThrowsArgumentExceptionWithInvalidOriginCoordinates()
         {
             Coordinate origin = Constants.Coordinates.LatitudeBelowMinimum;

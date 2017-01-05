@@ -13,10 +13,10 @@ namespace Geolocation
     /// </summary>
     public static class GeoCalculator
     {
-        public static double EarthRadiusInMiles = 3959.0;
-        public static double EarthRadiusInNauticalMiles = 3440.0;
-        public static double EarthRadiusInKilometers = 6371.0;
-        public static double EarthRadiusInMeters = 6371000.0;
+        private static double EarthRadiusInMiles = 3959.0;
+        private static double EarthRadiusInNauticalMiles = 3440.0;
+        private static double EarthRadiusInKilometers = 6371.0;
+        private static double EarthRadiusInMeters = 6371000.0;
 
         /// <summary>   
         /// Calculate the distance between two sets of coordinates.
