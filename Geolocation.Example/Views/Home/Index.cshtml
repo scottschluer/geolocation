@@ -1,0 +1,50 @@
+﻿@model Geolocation.Example.ViewModels.HomeViewModel
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <p>
+            For real world usage, you would obviously accept a zip code input here and use an API such as <a href="https://developers.google.com/maps/documentation/javascript/geocoding">Google's</a> or <a href="http://msdn.microsoft.com/en-us/library/cc966793.aspx">Bing's</a> to get the lat/ long for the origin location.
+            <br/>Here, I will use 90210 and hard code the lat / long.<br />
+            See <a href="https://github.com/scottschluer/Geocoder">https://github.com/scottschluer/Geocoder</a> for an easy to use Geocoder API for Google.
+        </p>
+        <p>Zip Code: 90210</p>
+        <p>
+            Radius:
+            @Html.DropDownListFor(x => x.SelectedRadius, Model.Radii)
+        </p>
+
+        <button type="submit">Search</button>
+    }
+
+    <br/><br/>
+
+    @if (Model.Results.Any())
+    {
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Distance</th>
+                <th>Direction</th>
+            </tr>
+        @foreach (var result in Model.Results)
+         {
+             <tr>
+                 <td>@result.Name</td>
+                 <td>@result.Distance</td>
+                 <td>@result.Direction</td>
+             </tr>
+         }
+        </table>
+    }
+</div>
+</body>
+</html>

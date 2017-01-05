@@ -1,6 +1,6 @@
-﻿namespace Geolocation.Example
+﻿namespace Geolocation.Example.Models
 {
-    public class Result
+    public class ResultModel
     {
         public string Name { get; set; }
         public double Distance { get; set; }
