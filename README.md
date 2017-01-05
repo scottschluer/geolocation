@@ -1,3 +1,8 @@
+[![][nuget-img]][nuget]
+
+[nuget]:     https://www.nuget.org/packages/Geolocation
+[nuget-img]: https://badge.fury.io/nu/Object.svg
+
 **USAGE:**
 
 All methods support passing Coordinate objects as parameters as well as decimal lat/long values. Assuming the following
