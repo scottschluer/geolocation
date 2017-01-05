@@ -43,6 +43,7 @@
     <Compile Include="Coordinate.cs" />
     <Compile Include="CoordinateBoundaries.cs" />
     <Compile Include="CoordinateValidator.cs" />
+    <Compile Include="DistanceUnit.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="GeoCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

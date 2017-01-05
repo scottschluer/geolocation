@@ -14,6 +14,10 @@ namespace Geolocation
     public class CoordinateBoundaries
     {
         private double _latitude;
+        private int _latitudeDistanceInMiles = 69;
+        private int _latitudeDistanceInNauticalMiles = 60;
+        private double _latitudeDistanceInKilometers = 111.045;
+        private int _latitudeDistanceInMeters = 111045;
 
         /// <summary>
         /// The origin point latitude in decimal notation
@@ -59,6 +63,21 @@ namespace Geolocation
             }
         }
 
+        private DistanceUnit _distanceUnit;
+
+        /// <summary>
+        /// The distance unit.
+        /// </summary>
+        public DistanceUnit DistanceUnit
+        {
+            get { return _distanceUnit; }
+            set
+            {
+                _distanceUnit = value;
+                Calculate();
+            }
+        }
+
         /// <summary>
         /// The lower boundary latitude point in decimal notation
         /// </summary>
@@ -91,25 +110,19 @@ namespace Geolocation
         /// </summary>
         /// <param name="originCoordinate">A <see cref="Coordinate"/> object representing the origin location</param>
         /// <param name="distance">The distance from the origin point in statute miles</param>
-        public CoordinateBoundaries(Coordinate originCoordinate, double distance)
-        {
-            if (!CoordinateValidator.Validate(originCoordinate.Latitude, originCoordinate.Longitude))
-                throw new ArgumentException("Invalid coordinates supplied.");
+        /// <param name="distanceUnit">The unit of distance</param>
+        public CoordinateBoundaries(Coordinate originCoordinate, double distance, DistanceUnit distanceUnit = DistanceUnit.Miles)
+            : this(originCoordinate.Latitude, originCoordinate.Longitude, distance, distanceUnit) { }
 
-            _latitude = originCoordinate.Latitude;
-            _longitude = originCoordinate.Longitude;
-            _distance = distance;
-
-            Calculate();
-        }
-
+        
         /// <summary>
         /// Creates a new CoordinateBoundary object
         /// </summary>
         /// <param name="latitude">The origin point latitude in decimal notation</param>
         /// <param name="longitude">The origin point longitude in decimal notation</param>
         /// <param name="distance">The distance from the origin point in statute miles</param>
-        public CoordinateBoundaries(double latitude, double longitude, double distance)
+        /// <param name="distanceUnit">The unit of distance</param>
+        public CoordinateBoundaries(double latitude, double longitude, double distance, DistanceUnit distanceUnit = DistanceUnit.Miles)
         {
             if (!CoordinateValidator.Validate(latitude, longitude))
                 throw new ArgumentException("Invalid coordinates supplied.");
@@ -117,6 +130,7 @@ namespace Geolocation
             _latitude = latitude;
             _longitude = longitude;
             _distance = distance;
+            _distanceUnit = distanceUnit;
 
             Calculate();
         }
@@ -126,8 +140,10 @@ namespace Geolocation
             if (!CoordinateValidator.Validate(Latitude, Longitude))
                 throw new ArgumentException("Invalid coordinates supplied.");
 
-            double latitudeConversionFactor = Distance / 69;
-            double longitudeConversionFactor = Distance / 69 / Math.Abs(Math.Cos(Latitude.ToRadian()));
+            double divisor = GetDivisor();
+            
+            double latitudeConversionFactor = Distance / divisor;
+            double longitudeConversionFactor = Distance / divisor / Math.Abs(Math.Cos(Latitude.ToRadian()));
 
             MinLatitude = Latitude - latitudeConversionFactor;
             MaxLatitude = Latitude + latitudeConversionFactor;
@@ -141,6 +157,21 @@ namespace Geolocation
 
             if (MinLongitude < -180) MinLongitude = 180 - (-180 - MinLongitude);
             if (MaxLongitude > 180) MaxLongitude = -180 + (MaxLongitude - 180);
+        }
+
+        private double GetDivisor()
+        {
+            switch (_distanceUnit)
+            {
+                case DistanceUnit.NauticalMiles:
+                    return _latitudeDistanceInNauticalMiles;
+                case DistanceUnit.Kilometers:
+                    return _latitudeDistanceInKilometers;
+                case DistanceUnit.Meters:
+                    return _latitudeDistanceInMeters;
+                default:
+                    return _latitudeDistanceInMiles;
+            }
         }
     }
 }

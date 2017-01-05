@@ -24,16 +24,16 @@ namespace Geolocation.Example.Controllers
             // See https://github.com/scottschluer/Geocoder for an easy to use Geocoder API for Google.
             var originCoordinate = new Coordinate { Latitude = 34.076234, Longitude = -118.395314 };
 
-            model.Results = GetResults(originCoordinate, radius);
+            model.Results = GetResults(originCoordinate, radius, model.SelectedDistanceUnit);
 
             return View(model);
         }
 
-        private IEnumerable<ResultModel> GetResults(Coordinate originCoordinate, double radius)
+        private IEnumerable<ResultModel> GetResults(Coordinate originCoordinate, double radius, DistanceUnit distanceUnit)
         {
             // Get the boundaries (min and max) latitude and longitude values. This forms a "square" around the origin coordinate
             // with each leg of the square exactly "X" miles from the origin, where X is the selected radius.
-            var boundaries = new CoordinateBoundaries(originCoordinate.Latitude, originCoordinate.Longitude, radius);
+            var boundaries = new CoordinateBoundaries(originCoordinate.Latitude, originCoordinate.Longitude, radius, distanceUnit);
 
             // Select from all of the locations
             return Locations
@@ -45,7 +45,7 @@ namespace Geolocation.Example.Controllers
                 .Select(result => new ResultModel
                 {
                     Name = result.Name,
-                    Distance = GeoCalculator.GetDistance(originCoordinate.Latitude, originCoordinate.Longitude, result.Latitude, result.Longitude, 1),
+                    Distance = GeoCalculator.GetDistance(originCoordinate.Latitude, originCoordinate.Longitude, result.Latitude, result.Longitude, distanceUnit: distanceUnit),
                     Direction = GeoCalculator.GetDirection(originCoordinate.Latitude, originCoordinate.Longitude, result.Latitude, result.Longitude)
                 })
                 // Filter by distance. This is necessary because a radius is a circle, yet we've defined a square around the origin coordinate.
@@ -64,6 +64,7 @@ namespace Geolocation.Example.Controllers
                 // Should Spago really be in the same list as Denny's? :)
                 return new List<LocationModel>
                 {
+                    new LocationModel { Name = "Goat & Vine", Latitude = 34.077237, Longitude = -118.395422 },
                     new LocationModel { Name = "Spago", Latitude = 34.0675918, Longitude = -118.3977091 },
                     new LocationModel { Name = "Jack N Jills Too", Latitude = 34.0734937, Longitude = -118.3830596 },
                     new LocationModel { Name = "Sushi Dokoro Ki Ra La", Latitude = 34.0394848, Longitude = -118.4657892 },

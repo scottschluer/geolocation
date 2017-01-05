@@ -19,12 +19,16 @@ namespace Geolocation.Example.ViewModels
             {
                 return new List<SelectListItem>
                 {
-                    new SelectListItem {Text = "5 Miles", Value = "5"},
-                    new SelectListItem {Text = "10 Miles", Value = "10"},
-                    new SelectListItem {Text = "25 Miles", Value = "25"}
+                    new SelectListItem {Text = "5", Value = "5"},
+                    new SelectListItem {Text = "10", Value = "10"},
+                    new SelectListItem {Text = "25", Value = "25"},
+                    new SelectListItem {Text = "100", Value = "100"},
+                    new SelectListItem {Text = "500", Value = "500"}
                 };
             }
         }
+
+        public DistanceUnit SelectedDistanceUnit { get; set; }
 
         public IEnumerable<ResultModel> Results { get; set; }
     }

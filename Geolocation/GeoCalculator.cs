@@ -13,10 +13,10 @@ namespace Geolocation
     /// </summary>
     public static class GeoCalculator
     {
-        /// <summary>
-        /// Radius of the earth in miles
-        /// </summary>
-        public static double EarthRadiusInMiles = 3956.0;
+        public static double EarthRadiusInMiles = 3959.0;
+        public static double EarthRadiusInNauticalMiles = 3440.0;
+        public static double EarthRadiusInKilometers = 6371.0;
+        public static double EarthRadiusInMeters = 6371000.0;
 
         /// <summary>   
         /// Calculate the distance between two sets of coordinates.
@@ -25,16 +25,17 @@ namespace Geolocation
         /// <param name="destinationLatitude">The latitude of the destination location in decimal notation</param>
         /// <param name="destinationLongitude">The longitude of the destination location in decimal notation</param>
         /// <param name="decimalPlaces">The number of decimal places to round the return value to</param>
+        /// <param name="distanceUnit">The unit of distance</param>
         /// <returns>A <see cref="Double"/> value representing the distance in miles from the origin to the destination coordinate</returns>
         /// </summary>
-        public static double GetDistance(double originLatitude, double originLongitude, double destinationLatitude, double destinationLongitude, int decimalPlaces = 1)
+        public static double GetDistance(double originLatitude, double originLongitude, double destinationLatitude, double destinationLongitude, int decimalPlaces = 1, DistanceUnit distanceUnit = DistanceUnit.Miles)
         {
             if (!CoordinateValidator.Validate(originLatitude, originLongitude))
                 throw new ArgumentException("Invalid origin coordinates supplied.");
             if (!CoordinateValidator.Validate(destinationLatitude, destinationLongitude))
                 throw new ArgumentException("Invalid destination coordinates supplied.");
 
-            double radius = EarthRadiusInMiles;
+            double radius = GetRadius(distanceUnit);
             return Math.Round(
                     radius * 2 *
                     Math.Asin(Math.Min(1,
@@ -44,18 +45,19 @@ namespace Geolocation
                                             Math.Pow(Math.Sin((originLongitude.DiffRadian(destinationLongitude)) / 2.0),
                                                      2.0))))), decimalPlaces);
         }
-
+        
         /// <summary>
         /// Calculate the distance between two sets of <see cref="Coordinate"/> objects
         /// </summary>
         /// <param name="originCoordinate">A <see cref="Coordinate"/> object representing the origin location</param>
         /// <param name="destinationCoordinate">A <see cref="Coordinate"/> object representing the destination location</param>
         /// <param name="decimalPlaces">The number of decimal places to round the return value to</param>
+        /// <param name="distanceUnit">The unit of distance</param>
         /// <returns>A <see cref="Double"/> value representing the distance in miles from the origin to the destination coordinate</returns>
-        public static Double GetDistance(Coordinate originCoordinate, Coordinate destinationCoordinate, int decimalPlaces = 1)
+        public static Double GetDistance(Coordinate originCoordinate, Coordinate destinationCoordinate, int decimalPlaces = 1, DistanceUnit distanceUnit = DistanceUnit.Miles)
         {
             return GetDistance(originCoordinate.Latitude, originCoordinate.Longitude, destinationCoordinate.Latitude,
-                destinationCoordinate.Longitude, decimalPlaces);
+                destinationCoordinate.Longitude, decimalPlaces, distanceUnit);
         }
 
         /// <summary>
@@ -135,6 +137,21 @@ namespace Geolocation
         {
             return GetDirection(originCoordinate.Latitude, originCoordinate.Longitude, destinationCoordinate.Latitude,
                                 destinationCoordinate.Longitude);
+        }
+
+        private static double GetRadius(DistanceUnit distanceUnit)
+        {
+            switch (distanceUnit)
+            {
+                case DistanceUnit.Kilometers:
+                    return EarthRadiusInKilometers;
+                case DistanceUnit.Meters:
+                    return EarthRadiusInMeters;
+                case DistanceUnit.NauticalMiles:
+                    return EarthRadiusInNauticalMiles;
+                default:
+                    return EarthRadiusInMiles;
+            }
         }
     }
 }

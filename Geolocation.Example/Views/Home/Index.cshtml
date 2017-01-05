@@ -19,7 +19,7 @@
         <p>Zip Code: 90210</p>
         <p>
             Radius:
-            @Html.DropDownListFor(x => x.SelectedRadius, Model.Radii)
+            @Html.DropDownListFor(x => x.SelectedRadius, Model.Radii) @Html.EnumDropDownListFor(x => x.SelectedDistanceUnit)
         </p>
 
         <button type="submit">Search</button>
