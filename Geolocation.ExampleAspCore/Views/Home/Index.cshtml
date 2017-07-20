@@ -1,0 +1,48 @@
+﻿@model Geolocation.ExampleAspCore.ViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<form asp-controller="Home" asp-action="Index" method="post" class="form-horizontal">
+    <p>
+        For real world usage, you would obviously accept a zip code input here and use an API such as <a href="https://developers.google.com/maps/documentation/javascript/geocoding">Google's</a> or <a href="http://msdn.microsoft.com/en-us/library/cc966793.aspx">Bing's</a> to get the lat/ long for the origin location.
+        <br />Here, I will use 90210 and hard code the lat / long.<br />
+        See <a href="https://github.com/scottschluer/Geocoder">https://github.com/scottschluer/Geocoder</a> for an easy to use Geocoder API for Google.
+    </p>
+    <p>Zip Code: 90210</p>
+    <p>
+        Radius:
+        <select data-val="true" data-val-number="The field SelectedRadius must be a number." data-val-required="The SelectedRadius field is required." id="SelectedRadius" name="SelectedRadius">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+        </select> <select data-val="true" data-val-required="The SelectedDistanceUnit field is required." id="SelectedDistanceUnit" name="SelectedDistanceUnit">
+            <option selected="selected" value="0">Miles</option>
+            <option value="1">NauticalMiles</option>
+            <option value="2">Kilometers</option>
+            <option value="3">Meters</option>
+        </select>
+    </p>
+    <button type="submit">Search</button>
+</form>
+<br /><br />
+@if (Model.Results.Any())
+{
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Distance</th>
+            <th>Direction</th>
+        </tr>
+        @foreach (var result in Model.Results)
+        {
+            <tr>
+                <td>@result.Name</td>
+                <td>@result.Distance</td>
+                <td>@result.Direction</td>
+            </tr>
+        }
+    </table>
+}

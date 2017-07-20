@@ -1,7 +1,4 @@
-[![][nuget-img]][nuget]
-
-[nuget]:     https://www.nuget.org/packages/Geolocation
-[nuget-img]: https://badge.fury.io/nu/geolocation.svg
+Added Support for .Net Core
 
 **USAGE:**
 
