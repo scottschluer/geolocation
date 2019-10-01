@@ -1,4 +1,8 @@
-Added Support for .Net Core
+# Geolocation
+
+New in v1.2.0
+
+- Added support for .NET Core
 
 **USAGE:**
 
