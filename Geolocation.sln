@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geolocation", "Geolocation\Geolocation.csproj", "{5B8B81AA-7F84-4547-BE17-76BA10A67096}"
 EndProject
@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeolocationNetStandard", "G
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geolocation.ExampleAspCore", "Geolocation.ExampleAspCore\Geolocation.ExampleAspCore.csproj", "{A74A5868-5585-43F5-A650-786CC478605B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeolocationNetStandard.UnitTests", "GeolocationNetStandard.UnitTests\GeolocationNetStandard.UnitTests.csproj", "{3A0A47B4-680F-4520-91CE-DF03B7AE8954}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeolocationNetStandard.UnitTests", "GeolocationNetStandard.UnitTests\GeolocationNetStandard.UnitTests.csproj", "{3A0A47B4-680F-4520-91CE-DF03B7AE8954}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,5 +48,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {84C5226A-6B9C-42FF-AD98-16567A4DD462}
 	EndGlobalSection
 EndGlobal

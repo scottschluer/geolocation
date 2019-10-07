@@ -4,3 +4,6 @@ _ReSharper.*
 bin
 obj
 packages
+.vscode
+.vs
+.vs\config
