@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.29306.81
+VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geolocation.UnitTests", "Geolocation.UnitTests\Geolocation.UnitTests.csproj", "{752B423B-D981-4C75-B3EA-C2CBF49EFAFB}"
 EndProject
@@ -44,6 +44,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {36A62C06-1602-4702-9C23-2E8E7A538BAD}
+		SolutionGuid = {84C5226A-6B9C-42FF-AD98-16567A4DD462}
 	EndGlobalSection
 EndGlobal
