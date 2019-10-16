@@ -1,3 +1,7 @@
+
+[![Build Status](https://dev.azure.com/rschiefer/rschiefer/_apis/build/status/rschiefer.geolocation?branchName=master)](https://dev.azure.com/rschiefer/rschiefer/_build/latest?definitionId=4&branchName=master)
+
+
 Added Support for .Net Core
 
 **USAGE:**
