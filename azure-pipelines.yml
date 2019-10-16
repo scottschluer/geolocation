@@ -12,18 +12,15 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
-steps:
-- script: dotnet build Geolocation_NetStandard.sln --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
-- script: dotnet test GeolocationNetStandard.UnitTests
-  displayName: 'dotnet test'
-  
+steps:  
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet build $(buildConfiguration)'
   inputs:
     command: build    
     projects: 'Geolocation_NetStandard.sln'
     arguments: '--configuration $(buildConfiguration)'
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
