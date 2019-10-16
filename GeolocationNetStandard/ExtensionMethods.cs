@@ -5,6 +5,7 @@
  */
 
 using System;
+using GeolocationNetStandard;
 
 namespace Geolocation
 {
@@ -17,8 +18,9 @@ namespace Geolocation
         /// <returns></returns>
         public static double ToRadian(this double d)
         {
-            return d * (Math.PI / 180);
+            return ExpressionExtensionMethods.ToRadiansFunc(d);
         }
+
 
         /// <summary>
         /// Diffs the radian.
@@ -28,7 +30,7 @@ namespace Geolocation
         /// <returns></returns>
         public static double DiffRadian(this double val1, double val2)
         {
-            return val2.ToRadian() - val1.ToRadian();
+            return ExpressionExtensionMethods.DiffRadiansFunc(val1, val2);
         }
 
         /// <summary>
@@ -38,7 +40,7 @@ namespace Geolocation
         /// <returns></returns>
         public static double ToDegrees(this double r)
         {
-            return r * 180 / Math.PI;
+            return ExpressionExtensionMethods.ToDegreesFunc(r);
         }
 
         /// <summary>
@@ -48,8 +50,7 @@ namespace Geolocation
         /// <returns></returns>
         public static double ToBearing(this double r)
         {
-            double degrees = ToDegrees(r);
-            return (degrees + 360) % 360;
+            return ExpressionExtensionMethods.ToBearingFunc(r);
         }
     }
 }
