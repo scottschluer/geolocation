@@ -17,3 +17,14 @@ steps:
   displayName: 'dotnet build $(buildConfiguration)'
 - script: dotnet test GeolocationNetStandard.UnitTests
   displayName: 'dotnet test'
+  
+- task: DotNetCoreCLI@2
+  inputs:
+    command: build    
+    projects: 'Geolocation_NetStandard.sln'
+    arguments: '--configuration $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: test
+    projects: '**/*Tests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
