@@ -7,9 +7,13 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace GeolocationNetStandard.UnitTests
 {
@@ -25,6 +29,7 @@ namespace GeolocationNetStandard.UnitTests
             connection.Open();
             var options = new DbContextOptionsBuilder<TestDbContext>()
                 .UseSqlite(connection)
+                //.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=TestingGeolocationExpressions")
                 .Options;
             _dbcontext = new TestDbContext(options);
 
@@ -37,7 +42,8 @@ namespace GeolocationNetStandard.UnitTests
         [Test]
         public void ShouldCalculateRadiansInSql()
         {
-            var query = _dbcontext.GeoLocations.Select(ExpressionHelperExtensionMethods.AsExpressionOfFunc<GeoLocation, double>(ExpressionExtensionMethods.ToRadiansExpression, x => x.Latitude));
+            var query = _dbcontext.GeoLocations
+                .Select(ExpressionHelperExtensionMethods.AsExpressionOfFunc<GeoLocation, double>(ExpressionExtensionMethods.ToRadiansExpression, x => x.Latitude));
             Console.WriteLine("queryWithExpression=" + query.ToSql());
             Assert.IsTrue(query.ToSql().Contains("*"), "Calculation should be done in SQL query.");
             Assert.AreEqual(0.2129301687433082d, query.First());
@@ -46,11 +52,32 @@ namespace GeolocationNetStandard.UnitTests
         [Test]
         public void ShouldCalculateRadiansInMemory()
         {
-            var query = _dbcontext.GeoLocations.Select(x => ExpressionExtensionMethods.ToRadiansFunc(x.Latitude));
+            var query = _dbcontext.GeoLocations
+                .Select(x => ExpressionExtensionMethods.ToRadiansFunc(x.Latitude));
             Console.WriteLine("queryWithExpression=" + query.ToSql());
             Assert.IsFalse(query.ToSql().Contains("*"), "Calculation should be done in memory.");
             Assert.AreEqual(0.2129301687433082d, query.First());
 
+        }
+
+        [Test]
+        public void ShouldCalculateDistanceInSql()
+        {
+
+            var query = _dbcontext.GeoLocations
+                .CalculateFieldInDb(x => x.CalculatedDistanceFromOrigin, ExpressionExtensionMethods.CalculateDistanceFrom<GeoLocation>(10.1, 20.2))
+                //.CalculateFieldInDb(x => x.CalculatedDistanceFromOrigin, ExpressionExtensionMethods.CalculateDistanceFrom<GeoLocation>(10.1, 20.2, x => x.Latitude, x => x.Longitude))
+                ;
+            Console.WriteLine("queryWithExpression=" + query.ToSql());
+            Assert.IsTrue(query.ToSql().Contains("/ 2"), "Calculation should be done in SQL query.");
+
+            // Math functions are sent to SQLServer but not SQLite
+            if (_dbcontext.Database.IsSqlServer())
+            {
+                Assert.IsTrue(query.ToSql().Contains("ROUND"), "Calculation should be done in SQL query.");
+            }
+
+            Assert.AreEqual(899.94000000000005d, query.First().CalculatedDistanceFromOrigin);
         }
     }
 
@@ -63,8 +90,8 @@ namespace GeolocationNetStandard.UnitTests
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<GeoLocation>()
-                .Property(x => x.LatitudeRadians)
-                .HasComputedColumnSql("-1.0");
+                .Property(x => x.CalculatedDistanceFromOrigin)
+                .HasDefaultValue(-1);
         }
     }
     public class GeoLocation
@@ -73,7 +100,7 @@ namespace GeolocationNetStandard.UnitTests
         public double Latitude { get; set; }
         public double Longitude { get; set; }
 
-        public double? LatitudeRadians { get; set; }
+        public double CalculatedDistanceFromOrigin { get; set; }
     }
 
     public static class IQueryableExtensions

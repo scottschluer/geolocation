@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 
 namespace GeolocationNetStandard
@@ -39,6 +40,34 @@ namespace GeolocationNetStandard
         public static IQueryable<TO> ApplyExpression<T, TO>(this IQueryable<T> source, Func<Expression, Expression> expression, Expression<Func<T, TO>> input)
         {
             return source.Select(expression.AsExpressionOfFunc(input));
+        }
+
+
+        public static IQueryable<T> CalculateFieldInDb<T, C>(this IQueryable<T> source, Expression<Func<T, C>> setter, Expression<Func<T, C>> calculation)
+        {
+            var input = Expression.Parameter(typeof(T));
+
+            var memberExpression = setter.Body as MemberExpression;
+            if (memberExpression is null)
+            {
+                memberExpression = (setter.Body as UnaryExpression).Operand as MemberExpression;
+            }
+
+            var propertiesToSet = new List<MemberAssignment>
+            {
+                Expression.Bind(memberExpression.Member, Expression.Invoke(calculation, input))
+            };
+            foreach (var property in typeof(T).GetRuntimeProperties().Where(x => x.Name != memberExpression.Member.Name))
+            {
+                propertiesToSet.Add(Expression.Bind(property, Expression.MakeMemberAccess(input, property)));
+            }
+
+            var constructor = typeof(T).GetTypeInfo().DeclaredConstructors.FirstOrDefault();
+            var create = Expression.MemberInit(
+                Expression.New(constructor),
+                propertiesToSet.ToArray());
+
+            return source.Select(Expression.Lambda<Func<T, T>>(create, input));
         }
     }
 }
