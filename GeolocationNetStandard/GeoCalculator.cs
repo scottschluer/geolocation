@@ -46,6 +46,8 @@ namespace Geolocation
                                                      2.0))))), decimalPlaces);
         }
         
+
+
         /// <summary>
         /// Calculate the distance between two sets of <see cref="Coordinate"/> objects
         /// </summary>

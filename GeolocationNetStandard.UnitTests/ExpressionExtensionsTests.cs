@@ -65,16 +65,15 @@ namespace GeolocationNetStandard.UnitTests
         {
 
             var query = _dbcontext.GeoLocations
-                .CalculateFieldInDb(x => x.CalculatedDistanceFromOrigin, ExpressionExtensionMethods.CalculateDistanceFrom<GeoLocation>(10.1, 20.2))
-                //.CalculateFieldInDb(x => x.CalculatedDistanceFromOrigin, ExpressionExtensionMethods.CalculateDistanceFrom<GeoLocation>(10.1, 20.2, x => x.Latitude, x => x.Longitude))
+                .CalculateDistanceInDatabase(x => x.CalculatedDistanceFromOrigin, 10.1, 20.2)
+                //.CalculateDistanceInDatabase(x => x.CalculatedDistanceFromOrigin, 10.1, 20.2, x => x.Latitude, x => x.Longitude)
                 ;
             Console.WriteLine("queryWithExpression=" + query.ToSql());
             Assert.IsTrue(query.ToSql().Contains("/ 2"), "Calculation should be done in SQL query.");
 
-            // Math functions are sent to SQLServer but not SQLite
             if (_dbcontext.Database.IsSqlServer())
             {
-                Assert.IsTrue(query.ToSql().Contains("ROUND"), "Calculation should be done in SQL query.");
+                Assert.IsTrue(query.ToSql().Contains("ROUND"), "Calculation (including all Math functions) should be done in SQL query.");
             }
 
             Assert.AreEqual(899.94000000000005d, query.First().CalculatedDistanceFromOrigin);

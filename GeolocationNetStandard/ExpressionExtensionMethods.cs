@@ -52,6 +52,22 @@ namespace GeolocationNetStandard
         static MethodInfo _pow = typeof(Math).GetRuntimeMethod("Pow", new[] { typeof(double), typeof(double) });
         static MethodInfo _min = typeof(Math).GetRuntimeMethod("Min", new[] { typeof(double), typeof(double) });
 
+        public static IQueryable<T> CalculateDistanceInDatabase<T>(this IQueryable<T> source, Expression<Func<T,double>> setter, double originLatitude, double originLongitude, Expression<Func<T, double>> latitudeProperty = null, Expression<Func<T, double>> longitudeProperty = null)
+        {
+            if (latitudeProperty is null)
+            {
+                return source.CalculateFieldInDb(
+                    setter,
+                    ExpressionExtensionMethods.CalculateDistanceFrom<T>(originLatitude, originLongitude));
+            }
+            else
+            {
+                return source.CalculateFieldInDb(
+                    setter,
+                    ExpressionExtensionMethods.CalculateDistanceFrom<T>(originLatitude, originLongitude, latitudeProperty, longitudeProperty));
+            }
+        }
+
         public static Expression<Func<T, double>> CalculateDistanceFrom<T>(double originLatitude, double originLongitude)
         {
             return CalculateDistanceFrom<T>(originLatitude, originLongitude, "Latitude", "Longitude");
