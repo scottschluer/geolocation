@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using Geolocation;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Query.Internal;
@@ -67,16 +68,31 @@ namespace GeolocationNetStandard.UnitTests
             var query = _dbcontext.GeoLocations
                 .CalculateDistanceInDatabase(x => x.CalculatedDistanceFromOrigin, 10.1, 20.2)
                 //.CalculateDistanceInDatabase(x => x.CalculatedDistanceFromOrigin, 10.1, 20.2, x => x.Latitude, x => x.Longitude)
+                .Take(10)
                 ;
             Console.WriteLine("queryWithExpression=" + query.ToSql());
             Assert.IsTrue(query.ToSql().Contains("/ 2"), "Calculation should be done in SQL query.");
 
             if (_dbcontext.Database.IsSqlServer())
             {
+                // SQLServer supports full distance calculation so query runs completely in SQL
                 Assert.IsTrue(query.ToSql().Contains("ASIN"), "Calculation (including all Math functions) should be done in SQL query.");
+                Assert.IsTrue(query.ToSql().Contains("TOP(10)"), "Calculation (including all Math functions) should be done in SQL query.");
             }
 
-            Assert.AreEqual(899.94081543187099d, query.First().CalculatedDistanceFromOrigin);
+            // SQLite doesn't support trig functions
+            Assert.AreEqual(899.74211318552204d, query.First().CalculatedDistanceFromOrigin);
+        }
+        [Test]
+        public void ShouldCalculateDistanceInKilometers()
+        {
+            var query = _dbcontext.GeoLocations
+                .CalculateDistanceInDatabase(x => x.CalculatedDistanceFromOrigin, 10.1, 20.2, distanceUnit: DistanceUnit.Kilometers)
+                .Take(10)
+                ;
+
+            // SQLite doesn't support trig functions
+            Assert.AreEqual(1447.9052798951657d, query.First().CalculatedDistanceFromOrigin);
         }
     }
 

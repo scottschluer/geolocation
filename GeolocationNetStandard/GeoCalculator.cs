@@ -141,7 +141,7 @@ namespace Geolocation
                                 destinationCoordinate.Longitude);
         }
 
-        private static double GetRadius(DistanceUnit distanceUnit)
+        internal static double GetRadius(DistanceUnit distanceUnit)
         {
             switch (distanceUnit)
             {
