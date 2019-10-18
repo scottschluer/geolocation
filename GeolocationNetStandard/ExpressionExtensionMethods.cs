@@ -44,7 +44,6 @@ namespace GeolocationNetStandard
         public static Func<double, double> ToBearingFunc = Exp.CompileExpression<double, double>(ToBearingExpression);
 
 
-        static MethodInfo _round = typeof(Math).GetRuntimeMethod("Round", new[] { typeof(double), typeof(int)});
         static MethodInfo _cos = typeof(Math).GetRuntimeMethod("Cos", new[] { typeof(double) });
         static MethodInfo _sin = typeof(Math).GetRuntimeMethod("Sin", new[] { typeof(double) });
         static MethodInfo _asin = typeof(Math).GetRuntimeMethod("Asin", new[] { typeof(double) });
@@ -52,7 +51,7 @@ namespace GeolocationNetStandard
         static MethodInfo _pow = typeof(Math).GetRuntimeMethod("Pow", new[] { typeof(double), typeof(double) });
         static MethodInfo _min = typeof(Math).GetRuntimeMethod("Min", new[] { typeof(double), typeof(double) });
 
-        public static IQueryable<T> CalculateDistanceInDatabase<T>(this IQueryable<T> source, Expression<Func<T,double>> setter, double originLatitude, double originLongitude, Expression<Func<T, double>> latitudeProperty = null, Expression<Func<T, double>> longitudeProperty = null)
+        public static IQueryable<T> CalculateDistanceInDatabase<T>(this IQueryable<T> source, Expression<Func<T, double>> setter, double originLatitude, double originLongitude, Expression<Func<T, double>> latitudeProperty = null, Expression<Func<T, double>> longitudeProperty = null)
         {
             if (latitudeProperty is null)
             {
@@ -72,12 +71,13 @@ namespace GeolocationNetStandard
         {
             return CalculateDistanceFrom<T>(originLatitude, originLongitude, "Latitude", "Longitude");
         }
-        public static Expression<Func<T, double>> CalculateDistanceFrom<T>(double originLatitude, double originLongitude, Expression<Func<T,double>> latitudeProperty, Expression<Func<T, double>> longitudeProperty)
+        public static Expression<Func<T, double>> CalculateDistanceFrom<T>(double originLatitude, double originLongitude, Expression<Func<T, double>> latitudeProperty, Expression<Func<T, double>> longitudeProperty)
         {
             return CalculateDistanceFrom<T>(originLatitude, originLongitude, (latitudeProperty?.Body as MemberExpression).Member.Name, (longitudeProperty?.Body as MemberExpression).Member.Name);
         }
         public static Expression<Func<T, double>> CalculateDistanceFrom<T>(double originLatitude, double originLongitude, string latitudePropertyName, string longitudePropertyName)
         {
+            //TODO - support choosing distance unit
             var earthsRadiusInMilesConstantExpression = Expression.Constant(3959.874319632);
             var inputExpression = Expression.Parameter(typeof(T), "x");
             var originLatitudeExpression = Expression.Constant(originLatitude);
@@ -92,14 +92,13 @@ namespace GeolocationNetStandard
             }
 
             return Expression.Lambda<Func<T, double>>(
-                Expression.Call(_round,
                     Expression.Multiply(
                         earthsRadiusInMilesConstantExpression,
                         Expression.Multiply(
                             Expression.Constant(2.0),
                             Expression.Call(_asin,
-                                //Expression.Call(_min,
-                                //    Expression.Constant(1.0),
+                                    //Expression.Call(_min,
+                                    //    Expression.Constant(1.0),
                                     Expression.Call(_sqrt,
                                         Expression.Add(
                                             Expression.Call(_pow,
@@ -128,12 +127,10 @@ namespace GeolocationNetStandard
                                             )
                                         )
                                     )
-                                //)
+                            //)
                             )
                         )
                     ),
-                    Expression.Constant(2)
-                ),
                 inputExpression);
         }
 

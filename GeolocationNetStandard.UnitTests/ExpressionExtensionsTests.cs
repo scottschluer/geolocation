@@ -73,10 +73,10 @@ namespace GeolocationNetStandard.UnitTests
 
             if (_dbcontext.Database.IsSqlServer())
             {
-                Assert.IsTrue(query.ToSql().Contains("ROUND"), "Calculation (including all Math functions) should be done in SQL query.");
+                Assert.IsTrue(query.ToSql().Contains("ASIN"), "Calculation (including all Math functions) should be done in SQL query.");
             }
 
-            Assert.AreEqual(899.94000000000005d, query.First().CalculatedDistanceFromOrigin);
+            Assert.AreEqual(899.94081543187099d, query.First().CalculatedDistanceFromOrigin);
         }
     }
 
