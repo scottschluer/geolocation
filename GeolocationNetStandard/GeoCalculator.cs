@@ -46,6 +46,8 @@ namespace Geolocation
                                                      2.0))))), decimalPlaces);
         }
         
+
+
         /// <summary>
         /// Calculate the distance between two sets of <see cref="Coordinate"/> objects
         /// </summary>
@@ -139,7 +141,7 @@ namespace Geolocation
                                 destinationCoordinate.Longitude);
         }
 
-        private static double GetRadius(DistanceUnit distanceUnit)
+        internal static double GetRadius(DistanceUnit distanceUnit)
         {
             switch (distanceUnit)
             {
