@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeolocationNetStandard", "GeolocationNetStandard\GeolocationNetStandard.csproj", "{355FCA47-5264-4E52-8D33-F8F7BB27E7C8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeolocationNetStandard.UnitTests", "GeolocationNetStandard.UnitTests\GeolocationNetStandard.UnitTests.csproj", "{AC76627C-FB51-44AC-8ACE-2A0725FD5FA8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{355FCA47-5264-4E52-8D33-F8F7BB27E7C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{355FCA47-5264-4E52-8D33-F8F7BB27E7C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{355FCA47-5264-4E52-8D33-F8F7BB27E7C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{355FCA47-5264-4E52-8D33-F8F7BB27E7C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC76627C-FB51-44AC-8ACE-2A0725FD5FA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC76627C-FB51-44AC-8ACE-2A0725FD5FA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC76627C-FB51-44AC-8ACE-2A0725FD5FA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC76627C-FB51-44AC-8ACE-2A0725FD5FA8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {89D1EF5A-6450-46CE-A0D3-EA89E5ED20B1}
+	EndGlobalSection
+EndGlobal

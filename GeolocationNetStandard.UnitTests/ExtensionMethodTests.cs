@@ -14,7 +14,7 @@ namespace GeolocationNetStandard.UnitTests
             double result = coordinate.Latitude.ToRadian();
             const double expectedResult = 0.59459164513542162;
 
-            Assert.AreEqual(result, expectedResult);
+            Assert.AreEqual(expectedResult, result);
         }
 
         [Test]
@@ -26,7 +26,7 @@ namespace GeolocationNetStandard.UnitTests
             double result = coordinate.Latitude.DiffRadian(destinationCoordinate.Latitude);
             const double expectedResult = 0.017604127364559075;
 
-            Assert.AreEqual(result, expectedResult);
+            Assert.AreEqual(expectedResult, result);
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace GeolocationNetStandard.UnitTests
             double result = angleTangent.ToBearing();
             const double expectedResult = 105.10796086557809;
 
-            Assert.AreEqual(result, expectedResult);
+            Assert.AreEqual(expectedResult, result);
         }
 
         [Test]
@@ -46,9 +46,9 @@ namespace GeolocationNetStandard.UnitTests
             const double angleTangent = 1.8344799871616866;
 
             double result = angleTangent.ToDegrees();
-            const double expectedResult = 105.10796086557809;
+            const double expectedResult = 105.10796086557808;
 
-            Assert.AreEqual(result, expectedResult);
+            Assert.AreEqual(expectedResult, result);
         }
     }
 }
