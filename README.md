@@ -1,8 +1,8 @@
+# Geolocation
 
-[![Build Status](https://dev.azure.com/rschiefer/rschiefer/_apis/build/status/rschiefer.geolocation?branchName=master)](https://dev.azure.com/rschiefer/rschiefer/_build/latest?definitionId=4&branchName=master)
+New in v1.2.0
 
-
-Added Support for .Net Core
+- Added support for .NET Core
 
 **USAGE:**
 

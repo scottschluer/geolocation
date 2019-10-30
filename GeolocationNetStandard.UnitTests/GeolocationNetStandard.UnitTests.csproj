@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GeolocationNetStandard\GeolocationNetStandard.csproj" />
+    <ProjectReference Include="..\Geolocation\Geolocation.csproj" />
   </ItemGroup>
 
 </Project>

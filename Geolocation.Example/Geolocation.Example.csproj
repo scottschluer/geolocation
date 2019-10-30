@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -119,7 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Geolocation\Geolocation.csproj">
-      <Project>{5b8b81aa-7f84-4547-be17-76ba10a67096}</Project>
+      <Project>{01211022-eeda-43c8-9a9b-2b2a6a42e073}</Project>
       <Name>Geolocation</Name>
     </ProjectReference>
   </ItemGroup>
