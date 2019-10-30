@@ -1,0 +1,232 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Geolocation</name>
+    </assembly>
+    <members>
+        <member name="T:Geolocation.Coordinate">
+            <summary>
+            Coordinates, i.e. latitude and longitude.
+            </summary>
+        </member>
+        <member name="P:Geolocation.Coordinate.Latitude">
+            <summary>
+            Latitude.
+            </summary>
+        </member>
+        <member name="P:Geolocation.Coordinate.Longitude">
+            <summary>
+            Longitude.
+            </summary>
+        </member>
+        <member name="M:Geolocation.Coordinate.#ctor(System.Double,System.Double)">
+            <summary>
+            Instantiate the object.
+            </summary>
+            <param name="latitude">Latitude.</param>
+            <param name="longitude">Longitude.</param>
+        </member>
+        <member name="T:Geolocation.CoordinateBoundaries">
+            <summary>
+            Calculates the upper, lower, left and right coordinate boundaries based on an origin point and a distance.
+            </summary>
+        </member>
+        <member name="P:Geolocation.CoordinateBoundaries.Latitude">
+            <summary>
+            The origin point latitude in decimal notation
+            </summary>
+        </member>
+        <member name="P:Geolocation.CoordinateBoundaries.Longitude">
+            <summary>
+            The origin point longitude in decimal notation
+            </summary>
+        </member>
+        <member name="P:Geolocation.CoordinateBoundaries.Distance">
+            <summary>
+            The distance in statue miles from the origin point
+            </summary>
+        </member>
+        <member name="P:Geolocation.CoordinateBoundaries.DistanceUnit">
+            <summary>
+            The distance unit.
+            </summary>
+        </member>
+        <member name="P:Geolocation.CoordinateBoundaries.MaxLatitude">
+            <summary>
+            The lower boundary latitude point in decimal notation
+            </summary>
+        </member>
+        <member name="P:Geolocation.CoordinateBoundaries.MinLatitude">
+            <summary>
+            The upper boundary latitude point in decimal notation
+            </summary>
+        </member>
+        <member name="P:Geolocation.CoordinateBoundaries.MaxLongitude">
+            <summary>
+            The right boundary longitude point in decimal notation
+            </summary>
+        </member>
+        <member name="P:Geolocation.CoordinateBoundaries.MinLongitude">
+            <summary>
+            The left boundary longitude point in decimal notation
+            </summary>
+        </member>
+        <member name="M:Geolocation.CoordinateBoundaries.#ctor">
+            <summary>
+            Creates a new CoordinateBoundary object
+            </summary>
+        </member>
+        <member name="M:Geolocation.CoordinateBoundaries.#ctor(Geolocation.Coordinate,System.Double,Geolocation.DistanceUnit)">
+            <summary>
+            Creates a new CoordinateBoundary object
+            </summary>
+            <param name="originCoordinate">A <see cref="T:Geolocation.Coordinate"/> object representing the origin location</param>
+            <param name="distance">The distance from the origin point in statute miles</param>
+            <param name="distanceUnit">The unit of distance</param>
+        </member>
+        <member name="M:Geolocation.CoordinateBoundaries.#ctor(System.Double,System.Double,System.Double,Geolocation.DistanceUnit)">
+            <summary>
+            Creates a new CoordinateBoundary object
+            </summary>
+            <param name="latitude">The origin point latitude in decimal notation</param>
+            <param name="longitude">The origin point longitude in decimal notation</param>
+            <param name="distance">The distance from the origin point in statute miles</param>
+            <param name="distanceUnit">The unit of distance</param>
+        </member>
+        <member name="T:Geolocation.CoordinateValidator">
+            <summary>
+            Utility class for coordinating the validators
+            </summary>
+        </member>
+        <member name="M:Geolocation.CoordinateValidator.Validate(System.Double,System.Double)">
+            <summary>
+            Validates the coordinate.
+            </summary>
+            <param name="latitude">The latitude.</param>
+            <param name="longitude">The longitude.</param>
+            <returns>True, if the coordinate is valid, false otherwise.</returns>
+        </member>
+        <member name="T:Geolocation.DistanceUnit">
+            <summary>
+            Distance unit.
+            </summary>
+        </member>
+        <member name="F:Geolocation.DistanceUnit.Miles">
+            <summary>
+            Miles.
+            </summary>
+        </member>
+        <member name="F:Geolocation.DistanceUnit.NauticalMiles">
+            <summary>
+            Nautical miles.
+            </summary>
+        </member>
+        <member name="F:Geolocation.DistanceUnit.Kilometers">
+            <summary>
+            Kilometers.
+            </summary>
+        </member>
+        <member name="F:Geolocation.DistanceUnit.Meters">
+            <summary>
+            Meters.
+            </summary>
+        </member>
+        <member name="T:Geolocation.ExtensionMethods">
+            <summary>
+            Extension methods used by Geolocation.
+            </summary>
+        </member>
+        <member name="M:Geolocation.ExtensionMethods.ToRadian(System.Double)">
+            <summary>
+            Gets the radian.
+            </summary>
+            <param name="d">The double.</param>
+            <returns>Double.</returns>
+        </member>
+        <member name="M:Geolocation.ExtensionMethods.DiffRadian(System.Double,System.Double)">
+            <summary>
+            Diffs the radian.
+            </summary>
+            <param name="val1">First value.</param>
+            <param name="val2">Second value.</param>
+            <returns>Double.</returns>
+        </member>
+        <member name="M:Geolocation.ExtensionMethods.ToDegrees(System.Double)">
+            <summary>
+            Gets the degrees.
+            </summary>
+            <param name="r">The radian.</param>
+            <returns>Double.</returns>
+        </member>
+        <member name="M:Geolocation.ExtensionMethods.ToBearing(System.Double)">
+            <summary>
+            Gets the bearing.
+            </summary>
+            <param name="r">The radian.</param>
+            <returns>Double.</returns>
+        </member>
+        <member name="T:Geolocation.GeoCalculator">
+            <summary>
+            Various utility methods for calculating geographically-based values
+            </summary>
+        </member>
+        <member name="M:Geolocation.GeoCalculator.GetDistance(System.Double,System.Double,System.Double,System.Double,System.Int32,Geolocation.DistanceUnit)">
+            <summary>   
+            Calculate the distance between two sets of coordinates.
+            <param name="originLatitude">The latitude of the origin location in decimal notation</param>
+            <param name="originLongitude">The longitude of the origin location in decimal notation</param>
+            <param name="destinationLatitude">The latitude of the destination location in decimal notation</param>
+            <param name="destinationLongitude">The longitude of the destination location in decimal notation</param>
+            <param name="decimalPlaces">The number of decimal places to round the return value to</param>
+            <param name="distanceUnit">The unit of distance</param>
+            <returns>A <see cref="T:System.Double"/> value representing the distance in miles from the origin to the destination coordinate</returns>
+            </summary>
+        </member>
+        <member name="M:Geolocation.GeoCalculator.GetDistance(Geolocation.Coordinate,Geolocation.Coordinate,System.Int32,Geolocation.DistanceUnit)">
+            <summary>
+            Calculate the distance between two sets of <see cref="T:Geolocation.Coordinate"/> objects
+            </summary>
+            <param name="originCoordinate">A <see cref="T:Geolocation.Coordinate"/> object representing the origin location</param>
+            <param name="destinationCoordinate">A <see cref="T:Geolocation.Coordinate"/> object representing the destination location</param>
+            <param name="decimalPlaces">The number of decimal places to round the return value to</param>
+            <param name="distanceUnit">The unit of distance</param>
+            <returns>A <see cref="T:System.Double"/> value representing the distance in miles from the origin to the destination coordinate</returns>
+        </member>
+        <member name="M:Geolocation.GeoCalculator.GetBearing(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Calculates the bearing, in degrees between two geographic points
+            </summary>
+            <param name="originLatitude">The latitude of the origin location in decimal notation</param>
+            <param name="originLongitude">The longitude of the origin location in decimal notation</param>
+            <param name="destinationLatitude">The latitude of the destination location in decimal notation</param>
+            <param name="destinationLongitude">The longitude of the destination location in decimal notation</param>
+            <returns>A <see cref="T:System.Double"/> value indicating the bearing from the origin to the destination</returns>
+        </member>
+        <member name="M:Geolocation.GeoCalculator.GetBearing(Geolocation.Coordinate,Geolocation.Coordinate)">
+            <summary>
+            Calculates the bearing, in degrees between two <see cref="T:Geolocation.Coordinate"/> objects
+            </summary>
+            <param name="originCoordinate">A <see cref="T:Geolocation.Coordinate"/> object representing the origin location</param>
+            <param name="destinationCoordinate">A <see cref="T:Geolocation.Coordinate"/> object representing the destination location</param>
+            <returns>A <see cref="T:System.Double"/> value indicating the bearing from the origin to the destination</returns>
+        </member>
+        <member name="M:Geolocation.GeoCalculator.GetDirection(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Gets the cardinal or ordinal direction from the origin point to the destination point
+            </summary>
+            <param name="originLatitude">The latitude of the origin location in decimal notation</param>
+            <param name="originLongitude">The longitude of the origin location in decimal notation</param>
+            <param name="destinationLatitude">The latitude of the destination location in decimal notation</param>
+            <param name="destinationLongitude">The longitude of the destination location in decimal notation</param>
+            <returns>A string value indicating the cardinal or ordinal direction from the origin to the desintation point</returns>
+        </member>
+        <member name="M:Geolocation.GeoCalculator.GetDirection(Geolocation.Coordinate,Geolocation.Coordinate)">
+            <summary>
+            Gets the cardinal or ordinal direction from the origin point to the destination point
+            </summary>
+            <param name="originCoordinate">A <see cref="T:Geolocation.Coordinate"/> object representing the origin location</param>
+            <param name="destinationCoordinate">A <see cref="T:Geolocation.Coordinate"/> object representing the destination location</param>
+            <returns>A <see cref="T:System.String"/> value indicating the cardinal or ordinal direction from the origin to the desintation point</returns>
+        </member>
+    </members>
+</doc>

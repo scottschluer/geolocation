@@ -113,8 +113,7 @@ namespace Geolocation
         /// <param name="distanceUnit">The unit of distance</param>
         public CoordinateBoundaries(Coordinate originCoordinate, double distance, DistanceUnit distanceUnit = DistanceUnit.Miles)
             : this(originCoordinate.Latitude, originCoordinate.Longitude, distance, distanceUnit) { }
-
-        
+         
         /// <summary>
         /// Creates a new CoordinateBoundary object
         /// </summary>
