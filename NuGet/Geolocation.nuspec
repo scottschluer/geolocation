@@ -2,23 +2,31 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Geolocation</id>
-        <version>1.1.1</version>
+        <version>1.2.0</version>
         <title>Geolocation</title>
         <authors>scottschluer</authors>
         <owners>scottschluer</owners>
-        <licenseUrl>https://github.com/scottschluer/geolocation/blob/master/LICENSE</licenseUrl>
+        <license type="file">LICENSE</license>
         <projectUrl>https://github.com/scottschluer/geolocation</projectUrl>
+        <repository type="github" url="https://github.com/scottschluer/geolocation.git"></repository>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>A C# class library that will calculate distance and cardinal direction between two sets of coordinates and provides the lat/long boundaries around an origin coordinate allowing for simple SQL or LINQ selection of locations within the given radius.</description>
         <summary>A C# class library that will calculate distance and cardinal direction between two sets of coordinates and provides the lat/long boundaries around an origin coordinate allowing for simple SQL or LINQ</summary>
         <releaseNotes>
-			- Added support for distance calculations using nautical miles, kilometers and meters.
+			- Added expression-based distance calculation extension method
+			- Converted helper methods to use expression trees
+			- Unit test improvements
+			- .NET core and .NET framework NuGet package
+			- Added Support For .Net Core
 		</releaseNotes>
-        <copyright>(c) 2017 Scott Schluer</copyright>
+        <copyright>(c) 2020 Scott Schluer</copyright>
         <tags>coordinate coordinates distance latitude longitude boundaries geolocation location</tags>
     </metadata>
     <files>
-        <file src="..\Geolocation\bin\Debug\Geolocation.dll" target="lib\Geolocation.dll" />
-        <file src="..\Geolocation\bin\Debug\Geolocation.pdb" target="lib\Geolocation.pdb" />
+        <file src="..\Geolocation\bin\Debug\net451\Geolocation.dll" target="lib\net451\Geolocation.dll" />
+        <file src="..\Geolocation\bin\Debug\net451\Geolocation.pdb" target="lib\net451\Geolocation.pdb" />
+        <file src="..\Geolocation\bin\Debug\netstandard2.0\Geolocation.dll" target="lib\netstandard2.0\Geolocation.dll" />
+        <file src="..\Geolocation\bin\Debug\netstandard2.0\Geolocation.pdb" target="lib\netstandard2.0\Geolocation.pdb" />
+        <file src="..\LICENSE" target="LICENSE" />
     </files>
 </package>
