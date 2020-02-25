@@ -1,8 +1,12 @@
 # Geolocation
 
-New in v1.2.0
+New in v1.2.1
 
-- Added support for .NET Core
+- Added expression-based distance calculation extension method
+- Converted helper methods to use expression trees
+- Unit test improvements
+- .NET core and .NET framework NuGet package
+- Added Support For .Net Core
 
 **USAGE:**
 
