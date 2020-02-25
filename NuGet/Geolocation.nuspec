@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Geolocation</id>
-        <version>1.2.0</version>
+        <version>1.2.1</version>
         <title>Geolocation</title>
         <authors>scottschluer</authors>
         <owners>scottschluer</owners>
@@ -23,10 +23,10 @@
         <tags>coordinate coordinates distance latitude longitude boundaries geolocation location</tags>
     </metadata>
     <files>
-        <file src="..\Geolocation\bin\Debug\net451\Geolocation.dll" target="lib\net451\Geolocation.dll" />
-        <file src="..\Geolocation\bin\Debug\net451\Geolocation.pdb" target="lib\net451\Geolocation.pdb" />
-        <file src="..\Geolocation\bin\Debug\netstandard2.0\Geolocation.dll" target="lib\netstandard2.0\Geolocation.dll" />
-        <file src="..\Geolocation\bin\Debug\netstandard2.0\Geolocation.pdb" target="lib\netstandard2.0\Geolocation.pdb" />
+        <file src="..\Geolocation\bin\Release\net451\Geolocation.dll" target="lib\net451\Geolocation.dll" />
+        <file src="..\Geolocation\bin\Release\net451\Geolocation.pdb" target="lib\net451\Geolocation.pdb" />
+        <file src="..\Geolocation\bin\Release\netstandard2.0\Geolocation.dll" target="lib\netstandard2.0\Geolocation.dll" />
+        <file src="..\Geolocation\bin\Release\netstandard2.0\Geolocation.pdb" target="lib\netstandard2.0\Geolocation.pdb" />
         <file src="..\LICENSE" target="LICENSE" />
     </files>
 </package>
